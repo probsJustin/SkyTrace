@@ -1,0 +1,28 @@
+{
+  "name": "adbs",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/adbs/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": [
+        "build"
+      ],
+      "options": {
+        "buildTarget": "adbs:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "adbs:build:development"
+        },
+        "production": {
+          "buildTarget": "adbs:build:production"
+        }
+      }
+    }
+  }
+}
