@@ -11,19 +11,20 @@ import { StatsController } from './stats/stats.controller';
 import { ConfigController } from './config/config.controller';
 import { ConfigService } from './config/config.service';
 import { HttpModule } from '@nestjs/axios';
+import { AdbsModule } from './adbs/adbs.module';
+import { DatabaseModule } from './database.module';
+
 
 @Module({
-  imports: [HttpModule],
+  imports: [HttpModule, AdbsModule, DatabaseModule],
   controllers: [
     AppController,
-    AdbsController,
     StatsController,
     DiscordController,
     ConfigController
   ],
   providers: [
     AppService, 
-    AdbsService, 
     StatsService,
     DiscordService,
     ConfigService

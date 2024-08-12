@@ -19,6 +19,11 @@ export class AdbsController {
   callMilitaryAPI() {
     return this.adbsService.callMilitaryAPI();
   }
+  
+  @Get("callMilitaryAPIWriteDb")
+  callMilitaryAPIWriteDb() {
+    return this.adbsService.callMilitaryAPIWriteDb();
+  }
 }
 
  
