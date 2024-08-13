@@ -13,7 +13,8 @@ import { AdminConfig } from '../admin/types/admin.config.model';
         HttpModule,
         SequelizeModule.forFeature([AdbsPlane]),
         SequelizeModule.forFeature([AdminConfig]),
-        SequelizeModule.forFeature([InternalConfig]),    ],
+        SequelizeModule.forFeature([InternalConfig]),
+    ],
     controllers: [InternalConfigController],
     providers: [InternalConfigService, DiscordService],
 })
