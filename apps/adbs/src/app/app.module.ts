@@ -13,20 +13,28 @@ import { ConfigService } from './config/config.service';
 import { HttpModule } from '@nestjs/axios';
 import { AdbsModule } from './adbs/adbs.module';
 import { DatabaseModule } from './database.module';
+import { AdbsJobsModule } from './jobs/adbs.jobs.module';
+import { DiscordModule } from './discord/discord.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 
 @Module({
-  imports: [HttpModule, AdbsModule, DatabaseModule],
+  imports: [
+    ScheduleModule.forRoot(),
+    HttpModule, 
+    AdbsModule, 
+    DatabaseModule,
+    AdbsJobsModule,
+    DiscordModule
+  ],
   controllers: [
     AppController,
     StatsController,
-    DiscordController,
     ConfigController
   ],
   providers: [
     AppService, 
     StatsService,
-    DiscordService,
     ConfigService
   ],
 })

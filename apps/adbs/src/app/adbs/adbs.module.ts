@@ -4,13 +4,15 @@ import { HttpModule } from '@nestjs/axios';
 import { AdbsService } from './adbs.service';
 import { AdbsPlane } from './types/adbs.plane.model';
 import { AdbsController } from './adbs.controller';
+import { DiscordModule } from '../discord/discord.module';
+import { DiscordService } from '../discord/discord.service';
 
 @Module({
     imports: [
         HttpModule,
-        SequelizeModule.forFeature([AdbsPlane])
+        SequelizeModule.forFeature([AdbsPlane]),
     ],
     controllers: [AdbsController],
-    providers: [AdbsService],
+    providers: [AdbsService, DiscordService],
 })
 export class AdbsModule {}

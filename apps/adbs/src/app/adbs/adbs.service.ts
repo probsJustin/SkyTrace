@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 
 import { AdbsDto } from './types/adbs.dto';
@@ -8,6 +8,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
+import { DiscordService } from '../discord/discord.service';
 
 @Injectable()
 export class AdbsService {
@@ -15,7 +16,9 @@ export class AdbsService {
   constructor(    
     @InjectModel(AdbsPlane)
     private readonly planeModel: typeof AdbsPlane,
-    private httpService: HttpService){
+    private discordService: DiscordService,
+    private httpService: HttpService
+    ){
   }
 
   getData(): { message: string } {
@@ -27,6 +30,8 @@ export class AdbsService {
   }
 
   callMilitaryAPIWriteDb(): Observable<any> {
+        this.discordService.sendMessage({discordChannel: "", message: "testing adbs .... 5 seconds"});
+
         const url = 'https://adsbexchange-com1.p.rapidapi.com/v2/mil/';
         const headers = {
           'x-rapidapi-key': '0fd6c7c2f8msh8db404e19ba5c2ap1bdc98jsn5e2e3bda3527',
