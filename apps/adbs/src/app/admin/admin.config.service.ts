@@ -2,10 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { AdminConfig } from './types/admin.config.model';
 import { InjectModel } from '@nestjs/sequelize';
 import { AdminConfigDto, DeleteAdminConfigDto, GetAdminConfigDto } from './types/admin.config.dto';
+import { InternalConfig } from '../config/types/internal.config.model';
+import { AdbsPlane } from '../adbs/types/adbs.plane.model';
 
 @Injectable()
 export class AdminConfigService {
   constructor(
+    @InjectModel(AdbsPlane)
+    private readonly planeModel: typeof AdbsPlane,
+    @InjectModel(InternalConfig)
+    private readonly internalConfig: typeof InternalConfig,
     @InjectModel(AdminConfig)
     private readonly adminConfig: typeof AdminConfig,
   ){}

@@ -13,7 +13,7 @@ export class AdbsJobsService {
 
     private readonly logger = new Logger(AdbsJobsService.name);
     
-    @Cron(CronExpression.EVERY_10_SECONDS)
+    @Cron(CronExpression.EVERY_10_MINUTES)
     async adbsApiCall_OnThirty() {
       this.logger.debug('Calling ADBS Exchange and writing to database....');
       try{

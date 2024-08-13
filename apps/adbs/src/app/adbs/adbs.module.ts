@@ -7,12 +7,14 @@ import { AdbsController } from './adbs.controller';
 import { DiscordModule } from '../discord/discord.module';
 import { DiscordService } from '../discord/discord.service';
 import { InternalConfig } from '../config/types/internal.config.model';
+import { AdminConfig } from '../admin/types/admin.config.model';
 
 @Module({
     imports: [
         HttpModule,
         SequelizeModule.forFeature([AdbsPlane]),
         SequelizeModule.forFeature([InternalConfig]),
+        SequelizeModule.forFeature([AdminConfig]),
     ],
     controllers: [AdbsController],
     providers: [AdbsService, DiscordService],

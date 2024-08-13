@@ -2,12 +2,18 @@ import { Injectable } from '@nestjs/common';
 import { DeleteInternalConfigDto, GetInternalConfigDto, InternalConfigDto } from './types/internal.config.dto';
 import { InternalConfig } from './types/internal.config.model';
 import { InjectModel } from '@nestjs/sequelize';
+import { AdminConfig } from '../admin/types/admin.config.model';
+import { AdbsPlane } from '../adbs/types/adbs.plane.model';
 
 @Injectable()
 export class InternalConfigService {
   constructor(
+    @InjectModel(AdbsPlane)
+    private readonly planeModel: typeof AdbsPlane,
     @InjectModel(InternalConfig)
     private readonly internalConfig: typeof InternalConfig,
+    @InjectModel(AdminConfig)
+    private readonly adminConfig: typeof AdminConfig,
   ){}
   
   getConfig(configRequest: GetInternalConfigDto): Promise<InternalConfig> {

@@ -10,6 +10,7 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
 import { DiscordService } from '../discord/discord.service';
 import { InternalConfig } from '../config/types/internal.config.model';
+import { AdminConfig } from '../admin/types/admin.config.model';
 
 @Injectable()
 export class AdbsService {
@@ -17,7 +18,10 @@ export class AdbsService {
   constructor(    
     @InjectModel(AdbsPlane)
     private readonly planeModel: typeof AdbsPlane,
+    @InjectModel(InternalConfig)
     private readonly internalConfig: typeof InternalConfig,
+    @InjectModel(AdminConfig)
+    private readonly adminConfig: typeof AdminConfig,
     private discordService: DiscordService,
     private httpService: HttpService
     ){

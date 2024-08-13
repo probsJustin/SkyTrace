@@ -11,6 +11,7 @@ import { AdbsJobsModule } from './jobs/adbs.jobs.module';
 import { DiscordModule } from './discord/discord.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { InternalConfigModule } from './config/internal.config.module';
+import { AdminConfigModule } from './admin/admin.config.module';
 
 
 @Module({
@@ -21,7 +22,8 @@ import { InternalConfigModule } from './config/internal.config.module';
     DatabaseModule,
     AdbsJobsModule,
     DiscordModule,
-    InternalConfigModule
+    InternalConfigModule,
+    AdminConfigModule
   ],
   controllers: [
     AppController,
