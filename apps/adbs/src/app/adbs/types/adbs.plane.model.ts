@@ -11,17 +11,21 @@ export class AdbsPlane extends Model{
     @Column
     flight: string;
     @Column
-    dbFlags: number;
+    r: string;
     @Column
-    alt_baro: number;
+    t: string;
     @Column
-    alt_geom: number;
+    dbFlags: string;
     @Column
-    gs: number;
+    alt_baro: string;
     @Column
-    track: number;
+    alt_geom: string;
     @Column
-    baro_rate: number;
+    gs: string;
+    @Column
+    track: string;
+    @Column
+    baro_rate: string;
     @Column
     squawk: string;
     @Column
@@ -29,49 +33,49 @@ export class AdbsPlane extends Model{
     @Column
     category: string;
     @Column
-    nav_qnh: number;
+    nav_qnh: string;
     @Column
-    nav_altitude_mcp: number;
+    nav_altitude_mcp: string;
     @Column
-    nav_heading: number;
+    nav_heading: string;
     @Column
-    lat: number;
+    lat: string;
     @Column
-    lon: number;
+    lon: string;
     @Column
-    nic: number;
+    nic: string;
     @Column
-    rc: number;
+    rc: string;
     @Column
-    seen_pos: number;
+    seen_pos: string;
     @Column
-    version: number;
+    version: string;
     @Column
-    nic_baro: number;
+    nic_baro: string;
     @Column
-    nac_p: number;
+    nac_p: string;
     @Column
-    nac_v: number;
+    nac_v: string;
     @Column
-    sil: number;
+    sil: string;
     @Column
     sil_type: string;
     @Column
-    gva: number;
+    gva: string;
     @Column
-    sda: number;
+    sda: string;
     @Column
-    alert: Boolean;
+    alert: string;
     @Column
-    spi: Boolean;
+    spi: string;
     @Column
     mlat: string;
     @Column
     tisb: string;
     @Column
-    messages: number;
+    messages: string;
     @Column
-    seen: number;
+    seen: string;
     @Column
-    rssi: number;
+    rssi: string;
     }

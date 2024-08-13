@@ -18,6 +18,11 @@ import { AdbsPlane } from './adbs/types/adbs.plane.model';
         database: "example",
         autoLoadModels: true,
         synchronize: true,
+        pool: {
+            acquire: 300000, // Increase acquire timeout to 30 seconds
+            max: 5,         // Maximum number of connections in pool
+            idle: 100000     // Maximum time, in milliseconds, that a connection can be idle before being released
+          },
         models: [AdbsPlane], // Ensure Account model is here
       }),
       inject: [ConfigService], // Inject the ConfigService to be used in the useFactory function
