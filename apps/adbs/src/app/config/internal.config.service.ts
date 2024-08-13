@@ -9,13 +9,13 @@ export class InternalConfigService {
     @InjectModel(InternalConfig)
     private readonly internalConfig: typeof InternalConfig,
   ){}
-
-  getData(): { message: string } {
-    return ({ message: 'Hello API' });
-  }
   
-  getConfig(configRequest: GetInternalConfigDto): {message: string } {
-    return ({ message: 'Hello API' });
+  getConfig(configRequest: GetInternalConfigDto): Promise<InternalConfig> {
+    return this.internalConfig.findOne({
+      where: {
+        discordChannel: configRequest.discordChannel
+      }
+    });
   }
 
   setConfig(configRequest: InternalConfigDto): {message: string } {
@@ -25,11 +25,28 @@ export class InternalConfigService {
     return ({ message: 'Potential Success' });
   }
 
-  updateConfig(configRequest: InternalConfigDto): {message: string } {
-    return ({ message: 'Hello API' });
+  async updateConfig(configRequest: InternalConfigDto): Promise<InternalConfig> {
+    const rowCount = await this.internalConfig.update(InternalConfigDto, {
+      where: {
+        discordChannel: configRequest.discordChannel
+      }
+    });
+    if(rowCount?.length > 0){
+      return this.internalConfig.findOne({
+        where:{
+          discordChannel: configRequest.discordChannel
+        }
+      });
+    }else{
+      throw new Error(`Could not update configuration`)
+    }
   }
 
-  deleteConfig(configRequest: DeleteInternalConfigDto): {message: string } {
-    return ({ message: 'Hello API' });
+  deleteConfig(configRequest: DeleteInternalConfigDto): Promise<number> {
+    return this.internalConfig.destroy({
+      where: {
+        discordChannel: configRequest.discordChannel
+      }
+    });
   }
 }
