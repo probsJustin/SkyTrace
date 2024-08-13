@@ -47,8 +47,8 @@ export class AdbsService {
                         type: data?.type,
                         flight: data?.flight,
                         dbFlags: data?.dbFlags,
-                        t: (data?.t || "").split(' ').join('')   // Remove spaces
-                        .split('\n').join('')  // Remove new line characters
+                        t: (data?.t || "").split(' ').join('')
+                        .split('\n').join('')
                         .split('\t').join(''),
                         alt_baro: data?.alt_baro,
                         alt_geom: data?.alt_geom,
