@@ -15,8 +15,7 @@ export class AdbsJobsService {
     
     @Cron(CronExpression.EVERY_10_SECONDS)
     async adbsApiCall_OnThirty() {
-      this.logger.debug('Called every 5 seconds');
-      console.log(`it ran...`); 
+      this.logger.debug('Calling ADBS Exchange and writing to database....');
       try{
         await this.adbsService.callMilitaryAPIWriteDb();
         await this.discordService.sendMessage({discordChannel: "Justins Code Support", message: "Calling Adbs Exchange....writing to database..."});
