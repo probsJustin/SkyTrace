@@ -30,7 +30,6 @@ export class AdbsService {
   }
 
   callMilitaryAPIWriteDb(): Observable<any> {
-        this.discordService.sendMessage({discordChannel: "", message: "testing adbs .... 5 seconds"});
 
         const url = 'https://adsbexchange-com1.p.rapidapi.com/v2/mil/';
         const headers = {
@@ -85,6 +84,7 @@ export class AdbsService {
                         
                 });
               }); // Assuming data.ac is the object structure expected by your model
+              this.discordService.sendMessage({discordChannel: "", message: "Called Adbs...."});
               return { message: 'Data stored successfully' };
             }
             return { message: 'No data to store' };

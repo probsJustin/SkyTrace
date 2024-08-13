@@ -3,10 +3,14 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 @Table
-export class Discord extends Model{
-
+export class InternalConfig extends Model{
     @Column
-    discordChan: string;
-
+    tenant: string;
+    @Column
+    discordChannel: string;
+    @Column
+    discordAdmin: string;
+    @Column
+    discordWebhook: string;
 }
 
