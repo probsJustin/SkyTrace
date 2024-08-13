@@ -13,7 +13,7 @@ export class InternalConfigService {
   getConfig(configRequest: GetInternalConfigDto): Promise<InternalConfig> {
     return this.internalConfig.findOne({
       where: {
-        discordChannel: configRequest.discordChannel
+        discordServer: configRequest.discordServer
       }
     });
   }
@@ -28,13 +28,13 @@ export class InternalConfigService {
   async updateConfig(configRequest: InternalConfigDto): Promise<InternalConfig> {
     const rowCount = await this.internalConfig.update(InternalConfigDto, {
       where: {
-        discordChannel: configRequest.discordChannel
+        discordServer: configRequest.discordServer
       }
     });
     if(rowCount?.length > 0){
       return this.internalConfig.findOne({
         where:{
-          discordChannel: configRequest.discordChannel
+          discordServer: configRequest.discordServer
         }
       });
     }else{
@@ -45,7 +45,7 @@ export class InternalConfigService {
   deleteConfig(configRequest: DeleteInternalConfigDto): Promise<number> {
     return this.internalConfig.destroy({
       where: {
-        discordChannel: configRequest.discordChannel
+        discordServer: configRequest.discordServer
       }
     });
   }

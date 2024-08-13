@@ -19,18 +19,22 @@ export class InternalConfigDto {
         example: "Something that doesnt matter...."
     })
     discordWebhook: string;
+    @ApiProperty({
+        example: "Something that doesnt matter...."
+    })
+    discordServer: string;
 }
 
 export class DeleteInternalConfigDto {
     @ApiProperty({
         example: "ThugShakker"
     })
-    discordChannel: string;
+    discordServer: string;
 }
 
 export class GetInternalConfigDto {
     @ApiProperty({
         example: "ThugShakker"
     })
-    discordChannel: string;
+    discordServer: string;
 }

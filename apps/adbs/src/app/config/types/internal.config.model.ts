@@ -12,5 +12,7 @@ export class InternalConfig extends Model{
     discordAdmin: string;
     @Column
     discordWebhook: string;
+    @Column
+    discordServer: string;
 }
 
