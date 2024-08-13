@@ -84,7 +84,7 @@ export class AdbsService {
                         
                 });
               }); // Assuming data.ac is the object structure expected by your model
-              this.discordService.sendMessage({discordChannel: "", message: "Called Adbs...."});
+              this.discordService.sendMessage({discordServer: "Justins Code Support", discordChannel: "", discordMessage: "Called Adbs...."});
               return { message: 'Data stored successfully' };
             }
             return { message: 'No data to store' };

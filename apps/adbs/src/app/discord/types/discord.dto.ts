@@ -8,7 +8,12 @@ export class DiscordDto {
     discordChannel: string;
 
     @ApiProperty({
+        example: "ThugShakker"
+    })
+    discordServer: string;
+
+    @ApiProperty({
         example: "Something that doesnt matter...."
     })
-    message: string;
+    discordMessage: string;
 }

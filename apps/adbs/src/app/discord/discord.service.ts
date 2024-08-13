@@ -23,7 +23,7 @@ export class DiscordService {
     const discordWebHookUrl = "https://discord.com/api/webhooks/1272651457069449267/cpEUiJKm3qtMXJMr6056Fm-sPKMsj9nrQKKqQ-f0AU2cQeM3nQR4trRmsnrTMNM1uiQP";
 
     const payload = {
-      content: discordRequest.message,
+      content: discordRequest.discordMessage,
       username: "ADBS Exchange",  // Optional: customize the username
       //avatar_url: "https://path-to-your-avatar-image.png"  // Optional: customize the avatar
     };

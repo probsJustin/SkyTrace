@@ -18,7 +18,7 @@ export class AdbsJobsService {
       this.logger.debug('Calling ADBS Exchange and writing to database....');
       try{
         await this.adbsService.callMilitaryAPIWriteDb();
-        await this.discordService.sendMessage({discordChannel: "Justins Code Support", message: "Calling Adbs Exchange....writing to database..."});
+        await this.discordService.sendMessage({discordChannel: "Justins Code Support", discordServer: "", discordMessage: "Calling Adbs Exchange....writing to database..."});
       }catch(err){
         console.log(`JSON: ${JSON.stringify(err)}`);
       }
