@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
 import { DiscordService } from '../discord/discord.service';
+import { InternalConfig } from '../config/types/internal.config.model';
 
 @Injectable()
 export class AdbsService {
@@ -16,6 +17,7 @@ export class AdbsService {
   constructor(    
     @InjectModel(AdbsPlane)
     private readonly planeModel: typeof AdbsPlane,
+    private readonly internalConfig: typeof InternalConfig,
     private discordService: DiscordService,
     private httpService: HttpService
     ){
@@ -29,11 +31,16 @@ export class AdbsService {
     return ({ message: 'Hello API' });
   }
 
-  callMilitaryAPIWriteDb(): Observable<any> {
+  async callMilitaryAPIWriteDb(): Promise<Observable<any>> {
+        const configuration = await this.internalConfig.findOne({
+            where: {
+                discordServer: "Justins Code Support"
+            }
+        })
 
         const url = 'https://adsbexchange-com1.p.rapidapi.com/v2/mil/';
         const headers = {
-          'x-rapidapi-key': '0fd6c7c2f8msh8db404e19ba5c2ap1bdc98jsn5e2e3bda3527',
+          'x-rapidapi-key': configuration.adbsApiToken,
           'x-rapidapi-host': 'adsbexchange-com1.p.rapidapi.com'
         };
     
@@ -96,10 +103,16 @@ export class AdbsService {
         );
   }
 
-  callMilitaryAPI() {
+  async callMilitaryAPI() {
+    const configuration = await this.internalConfig.findOne({
+        where: {
+            discordServer: "Justins Code Support"
+        }
+    })
+
         const url = 'https://adsbexchange-com1.p.rapidapi.com/v2/mil/';
         const headers = {
-            'x-rapidapi-key': '0fd6c7c2f8msh8db404e19ba5c2ap1bdc98jsn5e2e3bda3527',
+            'x-rapidapi-key': configuration.adbsApiToken,
             'x-rapidapi-host': 'adsbexchange-com1.p.rapidapi.com'
         };
 

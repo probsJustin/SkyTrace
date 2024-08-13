@@ -14,5 +14,7 @@ export class InternalConfig extends Model{
     discordWebhook: string;
     @Column
     discordServer: string;
+    @Column
+    adbsApiToken: string;
 }
 
