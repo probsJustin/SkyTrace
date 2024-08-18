@@ -6,6 +6,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { AdbsPlane } from '../adbs/types/adbs.plane.model';
 import crypto from 'crypto';
 import { InternalJobs } from './types/jobs.model';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class AdbsJobsService {
@@ -21,13 +22,14 @@ export class AdbsJobsService {
 
     private readonly logger = new Logger(AdbsJobsService.name);
     
-    @Cron(CronExpression.EVERY_30_SECONDS)
+    @Cron(CronExpression.EVERY_HOUR)
     async adbsApiCall_OnThirty() {
       const getJobNumber = `${Date.now().toString()}${crypto.randomBytes(10).toString('hex')}`;
       await this.internalJobs.create({
         jobNumber: getJobNumber,
         tenant: "admin",
-        jobStatus: "STARTING"
+        jobStatus: "STARTING",
+        jobFunction: "POLL_ADBS_EXCHANGE"
       })
       this.logger.debug('Calling ADBS Exchange and writing to database....');
       try{
@@ -70,10 +72,65 @@ export class AdbsJobsService {
       }
     }
 
-    @Cron(CronExpression.EVERY_30_MINUTES)
-    adbsApiCall_OnHour() {
-      this.logger.debug('Called every 5 seconds');
-    }
+    // @Cron(CronExpression.EVERY_30_MINUTES)
+    // async cleaningUpPlanes() {
+    //   const getJobNumber = `${Date.now().toString()}${crypto.randomBytes(10).toString('hex')}`;
+    //   await this.internalJobs.create({
+    //     jobNumber: getJobNumber,
+    //     tenant: "admin",
+    //     jobStatus: "STARTING_CLEANUP",
+    //     jobFunction: "DATABASE_CLEANUP"
+    //   })
+    //   this.logger.debug('Calling ADBS Exchange and writing to database....');
+    //     try{
+    //       const rowCountBefore = await this.planeModel.findAll();
+    //       await this.internalJobs.update({
+    //         jobStatus: "CALLING_ADBS_API"
+    //       }, {
+    //         where:{
+    //           jobNumber: getJobNumber,
+    //         }
+    //       })
+    //       const dateOfInterest = new Date();
+
+    //       // Create a start of day date object
+    //       const startOfDay = new Date(dateOfInterest);
+    //       startOfDay.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to zero
+          
+    //       // Create an end of day date object
+    //       const endOfDay = new Date(dateOfInterest);
+    //       endOfDay.setHours(23, 59, 59, 999); // Set to the last millisecond of the day
+          
+    //       await this.discordService.sendAdminMessage({tenant: "admin", discordChannel: "Justins Code Support", discordServer: "", discordMessage: `[${new Date()}]:[${getJobNumber}] Row Count Before: ${rowCountBefore.length}`});
+    //       await this.internalJobs.destroy({
+    //         where: {
+    //           createdAt: {
+    //             [Op.gte]: startOfDay, // Greater than or equal to the start of the day
+    //             [Op.lte]: endOfDay    // Less than or equal to the end of the day
+    //           }
+    //         }
+    //       })
+    //       await this.discordService.sendAdminMessage({tenant: "admin", discordChannel: "Justins Code Support", discordServer: "", discordMessage: `[${new Date()}]:[${getJobNumber}] Deleting all records for today.....`});
+    //       const rowCountAfter = await this.planeModel.findAll();
+    //       await this.internalJobs.update({
+    //         jobStatus: "DELETED_RECORDS"
+    //       }, {
+    //         where:{
+    //           jobNumber: getJobNumber,
+    //         }
+    //       })
+    //       await this.discordService.sendAdminMessage({tenant: "admin", discordChannel: "Justins Code Support", discordServer: "", discordMessage: `[${new Date()}]:[${getJobNumber}] Row Count After: ${rowCountAfter.length}`});
+    //       await this.internalJobs.update({
+    //         jobStatus: "SOFT_DELETE"
+    //       }, {
+    //         where:{
+    //           jobNumber: getJobNumber,
+    //         }
+    //       })
+    //     }catch(err){
+    //       console.log(`JSON: ${JSON.stringify(err)}`);
+    //     }
+    // }
 
     @Cron(CronExpression.EVERY_30_MINUTES)
     adbsStats() {

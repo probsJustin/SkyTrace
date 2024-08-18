@@ -12,5 +12,7 @@ export class InternalJobs extends Model{
     jobStatus: string;
     @Column
     jobTimeout: string;
+    @Column
+    jobFunction: string;
 }
 
