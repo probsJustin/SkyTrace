@@ -14,17 +14,17 @@ export class DiscordService {
     @InjectModel(AdminConfig)
     private readonly adminConfig: typeof AdminConfig,
     ){
-  }
+  } n
 
   async sendMessage(discordRequest: DiscordDto): Promise<void> {
     const tenantConfiguration = await this.internalConfig.findOne({
       where: {
-        discordChannel: discordRequest.discordChannel
+        tenant: discordRequest.tenant
       }
     });    
 
     const payload = {
-      content: discordRequest.discordMessage,
+      content: `[${new Date()}] ${discordRequest.discordMessage}`,
       username: "ADBS Exchange",  // Optional: customize the username
       //avatar_url: "https://path-to-your-avatar-image.png"  // Optional: customize the avatar
     };
@@ -36,10 +36,11 @@ export class DiscordService {
       console.error('Failed to send message via webhook:', error);
     }
   }
+
   async sendAdminMessage(discordRequest: DiscordDto): Promise<void> {
-    const tenantConfiguration = await this.adminConfig.findOne({
+    const tenantConfiguration = await this.internalConfig.findOne({
       where: {
-        tenant: "admin" 
+        tenant: discordRequest.tenant
       }
     });    
 

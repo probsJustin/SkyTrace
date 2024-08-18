@@ -44,5 +44,5 @@ export class GetInternalConfigDto {
     @ApiProperty({
         example: "ThugShakker"
     })
-    discordServer: string;
+    tenant: string;
 }

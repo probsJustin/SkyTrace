@@ -7,6 +7,8 @@ import { InternalConfigService } from './internal.config.service';
 import { InternalConfig } from './types/internal.config.model';
 import { AdbsPlane } from '../adbs/types/adbs.plane.model';
 import { AdminConfig } from '../admin/types/admin.config.model';
+import { Discord } from '../discord/types/discord.model';
+import { InternalJobs } from '../jobs/types/jobs.model';
 
 @Module({
     imports: [
@@ -14,6 +16,8 @@ import { AdminConfig } from '../admin/types/admin.config.model';
         SequelizeModule.forFeature([AdbsPlane]),
         SequelizeModule.forFeature([AdminConfig]),
         SequelizeModule.forFeature([InternalConfig]),
+        SequelizeModule.forFeature([Discord]),
+        SequelizeModule.forFeature([InternalJobs]),
     ],
     controllers: [InternalConfigController],
     providers: [InternalConfigService, DiscordService],

@@ -34,21 +34,30 @@ export class AvgService {
     const exampleDictionary = planeSeen.map(plane => ({
         type: plane.t,
         hex: plane.hex,
-        createdAt: plane.createdAt
+        createdAt: plane.createdAt,
+        plane: plane
     }));
 
+
     // Initializing `flightSchedule` as an object
-    const flightSchedule = {};
-
-    // Organizing planes by 'hex' into 'flightSchedule'
-    exampleDictionary.forEach(plane => {
-        // Check if the hex key already exists, if not, initialize it as an empty array
-        if (!flightSchedule[plane.hex]) {
-            flightSchedule[plane.hex] = [];
+    const flights = {};
+    // Organizing planes by 'hex' into `flights`
+    exampleDictionary.forEach(plane => { 
+        if (!flights[plane.hex]) {
+            flights[plane.hex] = [];
         }
+        flights[plane.hex].push(plane);
+    });
 
-        // Push the plane object to the respective hex array
-        flightSchedule[plane.hex].push(plane);
+    const flightSchedule = {};
+    // Iterate through each hex group and organize by 'createdAt'
+    Object.keys(flights).forEach(hex => {
+        flights[hex].forEach(plane => {
+            if (!flightSchedule[plane.createdAt]) {
+                flightSchedule[plane.createdAt] = [];
+            }
+            flightSchedule[plane.createdAt].push(plane);
+        });
     });
 
     // Returning the structured dictionary of planes grouped by 'hex'
@@ -56,6 +65,47 @@ export class AvgService {
       "AVG": (Object.keys(flightSchedule).length/Number(avgRequest.days)),
       "type": avgRequest.type
     }
+  }
+
+  async debugCreateCalculateAvg(avgRequest: AvgDto) {
+    // Assuming `adbsPlane` is defined somewhere in your class/service
+    const planeSeen = await this.adbsPlane.findAll({
+        where: {
+            t: avgRequest.type
+        }
+    });
+
+    // Mapping retrieved planes to a simplified dictionary format
+    const exampleDictionary = planeSeen.map(plane => ({
+        type: plane.t,
+        hex: plane.hex,
+        createdAt: plane.createdAt,
+        plane: plane
+    }));
+
+
+    // Initializing `flightSchedule` as an object
+    const flights = {};
+    // Organizing planes by 'hex' into `flights`
+    exampleDictionary.forEach(plane => { 
+        if (!flights[plane.hex]) {
+            flights[plane.hex] = [];
+        }
+        flights[plane.hex].push(plane);
+    });
+
+    const flightSchedule = {};
+    // Iterate through each hex group and organize by 'createdAt'
+    Object.keys(flights).forEach(hex => {
+        flights[hex].forEach(plane => {
+            if (!flightSchedule[plane.createdAt]) {
+                flightSchedule[plane.createdAt] = [];
+            }
+            flightSchedule[plane.createdAt].push(plane);
+        });
+    });
+
+    return flightSchedule;
   }
   
   async updateCalculateAvg(avgRequest: AvgDto): Promise<void> {

@@ -3,6 +3,11 @@ import { ApiProperty } from "@nestjs/swagger";
 
 export class DiscordDto {
     @ApiProperty({
+        example: "admin"
+    })
+    tenant: string;
+
+    @ApiProperty({
         example: "ThugShakker"
     })
     discordChannel: string;

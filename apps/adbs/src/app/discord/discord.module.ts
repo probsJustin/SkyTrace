@@ -6,6 +6,8 @@ import { InternalConfig } from '../config/types/internal.config.model';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { AdbsPlane } from '../adbs/types/adbs.plane.model';
 import { AdminConfig } from '../admin/types/admin.config.model';
+import { Discord } from './types/discord.model';
+import { InternalJobs } from '../jobs/types/jobs.model';
 
 
 @Module({
@@ -14,6 +16,8 @@ import { AdminConfig } from '../admin/types/admin.config.model';
         SequelizeModule.forFeature([AdbsPlane]),
         SequelizeModule.forFeature([AdminConfig]),
         SequelizeModule.forFeature([InternalConfig]),
+        SequelizeModule.forFeature([Discord]),
+        SequelizeModule.forFeature([InternalJobs]),
     ],
     controllers: [DiscordController],
     providers: [DiscordService],

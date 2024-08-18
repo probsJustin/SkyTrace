@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 
 import { AdbsDto } from './types/adbs.dto';
-import { map } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { AdbsPlane } from './types/adbs.plane.model';
 import { InjectModel } from '@nestjs/sequelize';
 import { Observable } from 'rxjs/internal/Observable';
@@ -35,77 +35,86 @@ export class AdbsService {
     return ({ message: 'Hello API' });
   }
 
-  async callMilitaryAPIWriteDb(): Promise<Observable<any>> {
-        const configuration = await this.internalConfig.findOne({
-            where: {
-                discordServer: "Justins Code Support"
-            }
-        })
+  async callMilitaryAPIWriteDb(): Promise<any> {
+    console.log("Fetching configuration...");
+    const configuration = await this.internalConfig.findOne({
+        where: {
+            tenant: "admin"
+        }
+    });
 
-        const url = 'https://adsbexchange-com1.p.rapidapi.com/v2/mil/';
-        const headers = {
-          'x-rapidapi-key': configuration.adbsApiToken,
-          'x-rapidapi-host': 'adsbexchange-com1.p.rapidapi.com'
-        };
-    
-        return this.httpService.get(url, { headers }).pipe(
-          map(response => response.data),
-          map(data => {
+    const url = 'https://adsbexchange-com1.p.rapidapi.com/v2/mil/';
+    const headers = {
+        'x-rapidapi-key': configuration.adbsApiToken,
+        'x-rapidapi-host': 'adsbexchange-com1.p.rapidapi.com'
+    };
+
+    console.log("Making HTTP request...");
+    return this.httpService.get(url, { headers }).pipe(
+        map(response => {
+            console.log("HTTP response received.");
+            return response.data;
+        }),
+        mergeMap(async data => {
             if (data?.ac) {
-                data?.ac.forEach(data =>{
-                    this.planeModel.create({
-                        hex: data?.hex,
-                        type: data?.type,
-                        flight: data?.flight,
-                        dbFlags: data?.dbFlags,
-                        t: (data?.t || "").split(' ').join('')
-                        .split('\n').join('')
-                        .split('\t').join(''),
-                        alt_baro: data?.alt_baro,
-                        alt_geom: data?.alt_geom,
-                        gs: data?.gs,
-                        track: data?.track,
-                        baro_rate: data?.baro_rate,
-                        squawk: data?.squawk,
-                        emergency: data?.emergency,
-                        category: data?.category,
-                        nav_qnh: data?.nav_qnh,
-                        nav_altitude_mcp: data?.nav_altitude_mcp,
-                        nav_heading: data?.nav_heading,
-                        lat: data?.lat,
-                        lon: data?.lon,
-                        nic: data?.nic,
-                        rc: data?.rc,
-                        seen_pos: data?.seen_pos,
-                        version: data?.version,
-                        nic_baro: data?.nic_baro,
-                        nac_p: data?.nac_p,
-                        nac_v: data?.nac_v,
-                        sil: data?.sil,
-                        sil_type: data?.sil_type,
-                        gva: data?.gva,
-                        sda: data?.sda,
-                        alert: data?.alert,
-                        spi: data?.spi,
+                console.log(`Processing ${data.ac.length} records...`);
+                for (const acData of data.ac) {
+                    console.log(`Creating record for hex: ${acData?.hex}`);
+                    await this.planeModel.create({
+                        hex: acData?.hex,
+                        type: acData?.type,
+                        flight: acData?.flight,
+                        dbFlags: acData?.dbFlags,
+                        t: (acData?.t || "").split(' ').join('')
+                            .split('\n').join('')
+                            .split('\t').join(''),
+                        alt_baro: acData?.alt_baro,
+                        alt_geom: acData?.alt_geom,
+                        gs: acData?.gs,
+                        track: acData?.track,
+                        baro_rate: acData?.baro_rate,
+                        squawk: acData?.squawk,
+                        emergency: acData?.emergency,
+                        category: acData?.category,
+                        nav_qnh: acData?.nav_qnh,
+                        nav_altitude_mcp: acData?.nav_altitude_mcp,
+                        nav_heading: acData?.nav_heading,
+                        lat: acData?.lat,
+                        lon: acData?.lon,
+                        nic: acData?.nic,
+                        rc: acData?.rc,
+                        seen_pos: acData?.seen_pos,
+                        version: acData?.version,
+                        nic_baro: acData?.nic_baro,
+                        nac_p: acData?.nac_p,
+                        nac_v: acData?.nac_v,
+                        sil: acData?.sil,
+                        sil_type: acData?.sil_type,
+                        gva: acData?.gva,
+                        sda: acData?.sda,
+                        alert: acData?.alert,
+                        spi: acData?.spi,
                         mlat: "",
                         tisb: "",
-                        messages: data?.messages,
-                        seen: data?.seen,
-                        rssi: data?.rssi
-                        
-                });
-              }); // Assuming data.ac is the object structure expected by your model
-              this.discordService.sendMessage({discordServer: "Justins Code Support", discordChannel: "", discordMessage: "Called Adbs...."});
-              return { message: 'Data stored successfully' };
+                        messages: acData?.messages,
+                        seen: acData?.seen,
+                        rssi: acData?.rssi                    
+                    });
+                }
+                console.log("All records processed.");
+                this.discordService.sendMessage({tenant: "admin", discordServer: "Justins Code Support", discordChannel: "", discordMessage: "Called Adbs...."});
+                return { message: 'Data stored successfully' };
             }
+            console.log("No data to process.");
             return { message: 'No data to store' };
-          }),
-          catchError(error => {
+        }),
+        catchError(error => {
             console.error('Failed to fetch data:', error);
             return throwError(() => new Error('Failed to fetch data: ' + error.message));
-          })
-        );
-  }
+        })
+    ).toPromise();
+}
+
 
   async callMilitaryAPI() {
     const configuration = await this.internalConfig.findOne({

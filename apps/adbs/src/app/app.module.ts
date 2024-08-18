@@ -22,7 +22,7 @@ import { AvgModule } from './avg/avg.module';
     AdbsModule, 
     DatabaseModule,
     AdbsJobsModule,
-    DiscordModule,
+    DiscordModule, 
     InternalConfigModule,
     AdminConfigModule,
     AvgModule

@@ -19,7 +19,7 @@ export class InternalConfigService {
   getConfig(configRequest: GetInternalConfigDto): Promise<InternalConfig> {
     return this.internalConfig.findOne({
       where: {
-        discordServer: configRequest.discordServer
+        tenant: configRequest.tenant
       }
     });
   }

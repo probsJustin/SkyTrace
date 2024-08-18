@@ -15,6 +15,14 @@ export class AvgController {
     return this.avgService.createCalculateAvg(avgRequest);
   }
 
+  @Post("debugCreateCalculateAvg")
+  debugCreateCalculateAvg(
+    @Body() avgRequest: AvgDto
+  ) {
+    return this.avgService.debugCreateCalculateAvg(avgRequest);
+  }
+
+
   @Post("updateCalculateAvg")
   updateCalculateAvg(
     @Body() avgRequest: AvgDto

@@ -3,12 +3,12 @@ import { InternalConfigService } from './internal.config.service';
 import { ApiTags } from '@nestjs/swagger';
 import { DeleteInternalConfigDto, GetInternalConfigDto, InternalConfigDto } from './types/internal.config.dto';
 
-@ApiTags('CONFIG')
-@Controller("config")
+@ApiTags('INTERNAL CONFIG')
+@Controller("intenral_config")
 export class InternalConfigController {
   constructor(private readonly internalConfigService: InternalConfigService) {}
 
-  @Get("getConfig")
+  @Post("getConfig")
   getConfig(
     @Body() configRequest: GetInternalConfigDto
   ) {
