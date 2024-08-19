@@ -12,25 +12,25 @@ export class DiscordController {
   getPlaneSubscriptionList(
     @Body() planeSubscriptionRequest: PlaneSubcriptionDto
   ) {
-    return this.planeSubscriptionService.getPlaneSubscriptionList();
+    return this.planeSubscriptionService.getPlaneSubscriptionList(planeSubscriptionRequest);
   }
   @Post("addPlaneSubscriptionList")
   addPlaneSubscriptionList(
     @Body() planeSubscriptionRequest: PlaneSubcriptionDto
   ) {
-    return this.planeSubscriptionService.addPlaneSubscriptionList();
+    return this.planeSubscriptionService.addPlaneSubscriptionList(planeSubscriptionRequest);
   }
   @Post("removePlaneSubscriptionList")
   removePlaneSubscriptionList(
     @Body() planeSubscriptionRequest: PlaneSubcriptionDto
   ) {
-    return this.planeSubscriptionService.removePlaneSubscriptionList();
+    return this.planeSubscriptionService.removePlaneSubscriptionList(planeSubscriptionRequest);
   }
   @Post("updatePlaneSubscriptionList")
   updatePlaneSubscriptionList(
     @Body() planeSubscriptionRequest: PlaneSubcriptionDto
   ) {
-    return this.planeSubscriptionService.updatePlaneSubscriptionList();
+    return this.planeSubscriptionService.updatePlaneSubscriptionList(planeSubscriptionRequest);
   }
 }
  

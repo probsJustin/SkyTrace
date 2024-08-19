@@ -13,6 +13,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { InternalConfigModule } from './config/internal.config.module';
 import { AdminConfigModule } from './admin/admin.config.module';
 import { AvgModule } from './avg/avg.module';
+import { PlaneSubscriptionModule } from './planeSubscriptions/planeSubscription.module';
 
 
 @Module({
@@ -25,7 +26,8 @@ import { AvgModule } from './avg/avg.module';
     DiscordModule, 
     InternalConfigModule,
     AdminConfigModule,
-    AvgModule
+    AvgModule,
+    PlaneSubscriptionModule
   ],
   controllers: [
     AppController,

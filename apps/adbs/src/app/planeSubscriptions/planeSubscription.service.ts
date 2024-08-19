@@ -9,6 +9,7 @@ import { AdminConfig } from '../admin/types/admin.config.model';
 import { PlaneSubscription } from './types/planeSubscription.model';
 import { AdbsPlane } from '../adbs/types/adbs.plane.model';
 import { PlaneSubcriptionDto } from './types/planeSubscription.dto';
+import { AvgService } from '../avg/avg.service';
 
 @Injectable()
 export class PlaneSubscriptionService {
@@ -23,6 +24,7 @@ export class PlaneSubscriptionService {
     @InjectModel(PlaneSubscription)
     private readonly planeSubscription: typeof PlaneSubscription,
     private discordService: DiscordService,
+    private avgService: AvgService,
     private httpService: HttpService
     ){
   }
@@ -57,4 +59,22 @@ export class PlaneSubscriptionService {
     })
   }
 
+  async sendPlaneSubscriptionMessage(planeSubscriptionRequest: PlaneSubcriptionDto) {
+    const allSubscriptions = await this.planeSubscription.findAll({
+        where: {
+            planeType: planeSubscriptionRequest.planeType
+        }
+    })
+
+    allSubscriptions.forEach(async planeSubscription =>{
+        this.discordService.sendMessage({
+            tenant: planeSubscription.tenant,
+            discordChannel: planeSubscription.discordChannel,
+            discordMessage: (await this.avgService.createCalculateAvg).toString(),
+            discordServer: planeSubscription.discordServer,
+        })
+    })
+    return true;
   }
+
+}

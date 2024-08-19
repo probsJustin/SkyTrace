@@ -11,6 +11,10 @@ export class PlaneSubscription extends Model{
     @Column
     discordServer: string;
     @Column
+    discordChannel: string;
+    @Column
+    discordWebhook: string;
+    @Column
     discordAdmin: string;
 }
 
