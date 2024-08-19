@@ -8,7 +8,7 @@ import { StatsDto } from './types/stats.dto';
 export class StatsController {
   constructor(private readonly statsService: StatsService) {}
 
-  @Get('yearlyMilitaryProjectedData')
+  @Get('calculateProjectedMilitaryAdbsPlanes')
   calculateProjectedMilitaryAdbsPlanes(
   ) {
     return this.statsService.calculateProjectedMilitaryAdbsPlanes();

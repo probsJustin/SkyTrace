@@ -26,7 +26,7 @@ export class StatsService {
 
   }
 
-  async calculateProjectedMilitaryAdbsPlanes() {
+  async calculateProjectedMilitaryAdbsPlanes(): Promise<number> {
     const dateOfInterest = new Date();
     const startOfDay = new Date(dateOfInterest);
     startOfDay.setHours(0, 0, 0, 0); 

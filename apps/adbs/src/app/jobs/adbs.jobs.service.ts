@@ -73,7 +73,7 @@ export class AdbsJobsService {
           }
         })
         const projectedMilitaryPlanesDbSize = this.statsService.calculateProjectedMilitaryAdbsPlanes();
-        await this.discordService.sendAdminMessage({tenant: "admin", discordChannel: "Justins Code Support", discordServer: "", discordMessage: `[${new Date()}]:[${getJobNumber}] Estimated Projection for Last Day [365]: ${projectedMilitaryPlanesDbSize.length}`});
+        await this.discordService.sendAdminMessage({tenant: "admin", discordChannel: "Justins Code Support", discordServer: "", discordMessage: `[${new Date()}]:[${getJobNumber}] Estimated Projection for Last Day [365]: ${projectedMilitaryPlanesDbSize}`});
       }catch(err){
         console.log(`JSON: ${JSON.stringify(err)}`);
       }
