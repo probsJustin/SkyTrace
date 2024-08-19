@@ -13,6 +13,7 @@ import { AdminConfigModule } from './admin/admin.config.module';
 import { AvgModule } from './avg/avg.module';
 import { PlaneSubscriptionModule } from './planeSubscriptions/planeSubscription.module';
 import { DiscordModule } from './discord/message/discord.module';
+import { MastodonConfigurationModule } from './mastodon/config/mastodon.configuration.module';
 
 
 @Module({
@@ -26,7 +27,8 @@ import { DiscordModule } from './discord/message/discord.module';
     InternalConfigModule,
     AdminConfigModule,
     AvgModule,
-    PlaneSubscriptionModule
+    PlaneSubscriptionModule,
+    MastodonConfigurationModule
   ],
   controllers: [
     AppController,
