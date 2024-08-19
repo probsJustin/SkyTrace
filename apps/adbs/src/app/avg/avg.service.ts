@@ -65,10 +65,10 @@ export class AvgService {
 
     // Returning the structured dictionary of planes grouped by 'hex'
     return {
-      "AVG": (Object.keys(flightSchedule).length/Number(avgRequest.days)),
+      "AVG": (Object.keys(flightSchedule).length/Number(avgRequest.timeFrame)),
       "type": avgRequest.type
     }
-  }
+  }   
 
   async debugCreateCalculateAvg(avgRequest: AvgDto) {
     // Assuming `adbsPlane` is defined somewhere in your class/service
@@ -115,7 +115,7 @@ export class AvgService {
     this.avg.update(avgRequest, {
       where:{
         type: avgRequest.type,
-        days: avgRequest.days
+        timeFrame: avgRequest.timeFrame
       },
       ...avgRequest
     })
@@ -125,7 +125,7 @@ export class AvgService {
     return this.avg.destroy({
       where: {
         type: avgRequest.type,
-        days: avgRequest.days
+        timeFrame: avgRequest.timeFrame
       }
     });
   }
@@ -134,7 +134,7 @@ export class AvgService {
     return this.avg.findOne({
       where: {
         type: avgRequest.type,
-        days: avgRequest.days
+        timeFrame: avgRequest.timeFrame
       }
     });
   }

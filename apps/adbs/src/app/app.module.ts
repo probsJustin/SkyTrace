@@ -14,6 +14,7 @@ import { DiscordModule } from './discord/message/discord.module';
 import { MastodonConfigurationModule } from './mastodon/config/mastodon.configuration.module';
 import { StatsModule } from './stats/stats.module';
 import { DiscordConfigurationModule } from './discord/configuration/discord.configuration.module';
+import { ProcessModule } from './process/process.module';
 
 
 @Module({
@@ -30,7 +31,8 @@ import { DiscordConfigurationModule } from './discord/configuration/discord.conf
     PlaneSubscriptionModule,
     DiscordConfigurationModule,
     MastodonConfigurationModule,
-    StatsModule
+    StatsModule,
+    ProcessModule
   ],
   controllers: [
     AppController,

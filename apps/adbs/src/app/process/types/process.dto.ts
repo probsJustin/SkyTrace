@@ -1,12 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
 
 
-export class AvgDto {
+export class ProcessDto {
     @ApiProperty({
-        example: "E6"
+        example: "TEX2"
     })
     type: string;
-
     @ApiProperty({
         example: "5"
     })
