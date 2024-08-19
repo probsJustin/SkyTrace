@@ -13,7 +13,7 @@ export class StatsService {
 
   constructor(
     @InjectModel(AdbsPlane)
-    private readonly planeModel: typeof AdbsPlane,
+    private readonly adbsPlane: typeof AdbsPlane,
     @InjectModel(InternalConfig)
     private readonly internalConfig: typeof InternalConfig,
     @InjectModel(AdminConfig)
@@ -33,7 +33,7 @@ export class StatsService {
 
     const endOfDay = new Date(dateOfInterest);
     endOfDay.setHours(23, 59, 59, 999); // Set to the last millisecond of the day
-    const rowCountForToday = await this.planeModel.findAll({
+    const rowCountForToday = await this.adbsPlane.findAll({
       where: {
         createdAt: {
           [Op.gte]: startOfDay,

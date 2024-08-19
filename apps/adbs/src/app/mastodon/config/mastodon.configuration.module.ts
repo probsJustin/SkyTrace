@@ -5,12 +5,12 @@ import { InternalJobs } from '../../jobs/types/jobs.model';
 import { AdbsPlane } from '../../adbs/types/adbs.plane.model';
 import { AdminConfig } from '../../admin/types/admin.config.model';
 import { InternalConfig } from '../../config/types/internal.config.model';
-import { DiscordConfigurationController } from '../../discord/configuration/discord.configuration.controller';
-import { DiscordConfigurationService } from '../../discord/configuration/discord.configuration.service';
 import { DiscordConfig } from '../../discord/configuration/types/discord.configuration.model';
 import { DiscordService } from '../../discord/message/discord.service';
 import { Discord } from '../../discord/message/types/discord.model';
 import { MastodonConfig } from './types/mastodon.configuration.model';
+import { MastodonConfigurationController } from './mastodon.configuration.controller';
+import { MastodonConfigurationService } from './mastodon.configuration.service';
 
 
 
@@ -25,7 +25,7 @@ import { MastodonConfig } from './types/mastodon.configuration.model';
         SequelizeModule.forFeature([DiscordConfig]),
         SequelizeModule.forFeature([MastodonConfig]),
     ],
-    controllers: [DiscordConfigurationController],
-    providers: [DiscordConfigurationService, DiscordService],
+    controllers: [MastodonConfigurationController],
+    providers: [MastodonConfigurationService, DiscordService],
 })
-export class DiscordConfigurationModule {}
+export class MastodonConfigurationModule {}

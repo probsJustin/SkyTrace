@@ -12,6 +12,8 @@ import { Discord } from '../discord/message/types/discord.model';
 import { DiscordService } from '../discord/message/discord.service';
 import { DiscordConfig } from '../discord/configuration/types/discord.configuration.model';
 import { DiscordConfigurationService } from '../discord/configuration/discord.configuration.service';
+import { StatsService } from '../stats/stats.service';
+import { Stats } from '../stats/types/stats.model';
 
 @Module({
     imports: [
@@ -22,7 +24,8 @@ import { DiscordConfigurationService } from '../discord/configuration/discord.co
         SequelizeModule.forFeature([Discord]),
         SequelizeModule.forFeature([InternalJobs]),
         SequelizeModule.forFeature([DiscordConfig]),
+        SequelizeModule.forFeature([Stats])
     ],
-  providers: [AdbsJobsService, DiscordService, DiscordConfigurationService, AdminConfigService, AdbsService],
+  providers: [AdbsJobsService, StatsService, DiscordService, DiscordConfigurationService, AdminConfigService, AdbsService],
 })
 export class AdbsJobsModule {}

@@ -15,6 +15,7 @@ import { PlaneSubscriptionModule } from './planeSubscriptions/planeSubscription.
 import { DiscordModule } from './discord/message/discord.module';
 import { MastodonConfigurationModule } from './mastodon/config/mastodon.configuration.module';
 import { StatsModule } from './stats/stats.module';
+import { DiscordConfigurationModule } from './discord/configuration/discord.configuration.module';
 
 
 @Module({
@@ -29,16 +30,15 @@ import { StatsModule } from './stats/stats.module';
     AdminConfigModule,
     AvgModule,
     PlaneSubscriptionModule,
+    DiscordConfigurationModule,
     MastodonConfigurationModule,
     StatsModule
   ],
   controllers: [
     AppController,
-    StatsController,
   ],
   providers: [
-    AppService, 
-    StatsService,
+    AppService,
   ],
 })
 export class AppModule {}
