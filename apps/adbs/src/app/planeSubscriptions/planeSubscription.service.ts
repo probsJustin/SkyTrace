@@ -1,15 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-
 import { InjectModel } from '@nestjs/sequelize';
-
-import { DiscordService } from '../discord/discord.service';
 import { InternalConfig } from '../config/types/internal.config.model';
 import { AdminConfig } from '../admin/types/admin.config.model';
 import { PlaneSubscription } from './types/planeSubscription.model';
 import { AdbsPlane } from '../adbs/types/adbs.plane.model';
 import { PlaneSubcriptionDto } from './types/planeSubscription.dto';
 import { AvgService } from '../avg/avg.service';
+import { DiscordService } from '../discord/message/discord.service';
 
 @Injectable()
 export class PlaneSubscriptionService {
@@ -66,13 +64,17 @@ export class PlaneSubscriptionService {
         }
     })
 
-    allSubscriptions.forEach(async planeSubscription =>{
-        this.discordService.sendMessage({
-            tenant: planeSubscription.tenant,
-            discordChannel: planeSubscription.discordChannel,
-            discordMessage: (await this.avgService.createCalculateAvg).toString(),
-            discordServer: planeSubscription.discordServer,
-        })
+    const subscriptionSent = allSubscriptions.map(async planeSubscription =>{
+        return { 
+            didItSend: await this.discordService.sendMessage({
+                tenant: planeSubscription.tenant,
+                discordChannel: planeSubscription.discordChannel,
+                discordMessage: (await this.avgService.createCalculateAvg).toString(),
+                discordServer: planeSubscription.discordServer,
+            }),
+            discordServer: planeSubscription.discordChannel,
+            tenant: planeSubscription.discordChannel
+        }
     })
     return true;
   }

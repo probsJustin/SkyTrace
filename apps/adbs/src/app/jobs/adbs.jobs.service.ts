@@ -1,12 +1,13 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
-import { DiscordService } from '../discord/discord.service';
 import { AdbsService } from '../adbs/adbs.service';
 import { InjectModel } from '@nestjs/sequelize';
 import { AdbsPlane } from '../adbs/types/adbs.plane.model';
 import crypto from 'crypto';
 import { InternalJobs } from './types/jobs.model';
 import { Op } from 'sequelize';
+import { DiscordConfig } from '../discord/configuration/types/discord.configuration.model';
+import { DiscordService } from '../discord/message/discord.service';
 
 @Injectable()
 export class AdbsJobsService {
@@ -18,6 +19,8 @@ export class AdbsJobsService {
         private readonly planeModel: typeof AdbsPlane,
         @InjectModel(InternalJobs)
         private readonly internalJobs: typeof InternalJobs,
+        @InjectModel(DiscordConfig)
+        private readonly discordConfig: typeof DiscordConfig,
         ){}
 
     private readonly logger = new Logger(AdbsJobsService.name);

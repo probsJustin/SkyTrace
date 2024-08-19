@@ -8,9 +8,9 @@ import { InjectModel } from '@nestjs/sequelize';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
-import { DiscordService } from '../discord/discord.service';
 import { InternalConfig } from '../config/types/internal.config.model';
 import { AdminConfig } from '../admin/types/admin.config.model';
+import { DiscordService } from '../discord/message/discord.service';
 
 @Injectable()
 export class AdbsService {

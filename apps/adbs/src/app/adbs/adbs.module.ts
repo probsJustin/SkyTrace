@@ -4,12 +4,11 @@ import { HttpModule } from '@nestjs/axios';
 import { AdbsService } from './adbs.service';
 import { AdbsPlane } from './types/adbs.plane.model';
 import { AdbsController } from './adbs.controller';
-import { DiscordModule } from '../discord/discord.module';
-import { DiscordService } from '../discord/discord.service';
 import { InternalConfig } from '../config/types/internal.config.model';
 import { AdminConfig } from '../admin/types/admin.config.model';
-import { Discord } from '../discord/types/discord.model';
 import { InternalJobs } from '../jobs/types/jobs.model';
+import { DiscordService } from '../discord/message/discord.service';
+import { Discord } from '../discord/message/types/discord.model';
 
 @Module({
     imports: [

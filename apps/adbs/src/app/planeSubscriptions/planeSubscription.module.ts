@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { DiscordService } from '../discord/discord.service';
 import { HttpModule } from '@nestjs/axios';
 import { AdbsService } from '../adbs/adbs.service';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -7,10 +6,11 @@ import { AdbsPlane } from '../adbs/types/adbs.plane.model';
 import { InternalConfig } from '../config/types/internal.config.model';
 import { AdminConfig } from '../admin/types/admin.config.model';
 import { AdminConfigService } from '../admin/admin.config.service';
-import { Discord } from '../discord/types/discord.model';
 import { PlaneSubscriptionService } from './planeSubscription.service';
 import { PlaneSubscription } from './types/planeSubscription.model';
 import { InternalJobs } from '../jobs/types/jobs.model';
+import { Discord } from '../discord/message/types/discord.model';
+import { DiscordService } from '../discord/message/discord.service';
 
 @Module({
     imports: [

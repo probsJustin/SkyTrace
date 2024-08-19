@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { HttpModule } from '@nestjs/axios';
-import { DiscordService } from '../discord/discord.service';
 import { InternalConfigController } from './internal.config.controller';
 import { InternalConfigService } from './internal.config.service';
 import { InternalConfig } from './types/internal.config.model';
 import { AdbsPlane } from '../adbs/types/adbs.plane.model';
 import { AdminConfig } from '../admin/types/admin.config.model';
-import { Discord } from '../discord/types/discord.model';
 import { InternalJobs } from '../jobs/types/jobs.model';
+import { DiscordService } from '../discord/message/discord.service';
+import { Discord } from '../discord/message/types/discord.model';
 
 @Module({
     imports: [
