@@ -7,12 +7,10 @@ export class MastodonConfig extends Model{
     @Column
     tenant: string;
     @Column
-    discordChannel: string;
+    mastodonAccount: string;
     @Column
-    discordServer: string;
+    mastodonApiKey: string;
     @Column
-    discordMessage: string;
-    @Column 
-    discordWebhook: string;
+    mastodonApiUrl: string;
 }
 

@@ -10,15 +10,15 @@ export class MastodonConfigurationDto {
     @ApiProperty({
         example: "ThugShakker"
     })
-    discordChannel: string;
+    mastodonAccount: string;
 
     @ApiProperty({
         example: "ThugShakker"
     })
-    discordServer: string;
+    mastodonApiKey: string;
 
     @ApiProperty({
         example: "Something that doesnt matter...."
     })
-    discordMessage: string;
+    mastodonApiUrl: string;
 }

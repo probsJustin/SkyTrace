@@ -23,31 +23,31 @@ export class MastodonConfigurationService {
 
   ){}
   
-  getConfig(mastodonConfig: MastodonConfigurationDto): Promise<MastodonConfig> {
-    return this.discordConfig.findOne({
+  getMastodonConfig(mastodonConfig: MastodonConfigurationDto): Promise<MastodonConfig> {
+    return this.mastodonConfig.findOne({
       where: {
         tenant: mastodonConfig.tenant
       }
     });
   }
 
-  setConfig(mastodonConfig: MastodonConfigurationDto): {message: string } {
+  setMastodonConfig(mastodonConfig: MastodonConfigurationDto): {message: string } {
     this.mastodonConfig.create({
       ...mastodonConfig
     });
     return ({ message: 'Potential Success' });
   }
 
-  async updateConfig(mastodonConfig: MastodonConfigurationDto): Promise<MastodonConfig> {
+  async updateMastodonConfig(mastodonConfig: MastodonConfigurationDto): Promise<MastodonConfig> {
     const rowCount = await this.mastodonConfig.update(MastodonConfigurationDto, {
       where: {
-        discordServer: mastodonConfig.discordServer
+        mastodonAccount: mastodonConfig.mastodonAccount
       }
     });
     if(rowCount?.length > 0){
       return this.mastodonConfig.findOne({
         where:{
-          discordServer: mastodonConfig.discordServer
+          mastodonAccount: mastodonConfig.mastodonAccount
         }
       });
     }else{
@@ -55,10 +55,10 @@ export class MastodonConfigurationService {
     }
   }
 
-  deleteConfig(mastodonConfig: MastodonConfigurationDto): Promise<number> {
+  deleteMastodonConfig(mastodonConfig: MastodonConfigurationDto): Promise<number> {
     return this.mastodonConfig.destroy({
       where: {
-        discordServer: mastodonConfig.discordServer
+        mastodonAccount: mastodonConfig.mastodonAccount
       }
     });
   }

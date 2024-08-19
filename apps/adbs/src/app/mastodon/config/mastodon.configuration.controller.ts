@@ -12,26 +12,26 @@ export class MastodonConfigurationController {
   getMastodonConfig(
     @Body() mastodonConfigurationDto: MastodonConfigurationDto
   ) {
-    return this.mastodonConfigurationService.getConfig(mastodonConfigurationDto);
+    return this.mastodonConfigurationService.getMastodonConfig(mastodonConfigurationDto);
   }
 
   @Post("setMastodonConfig")
   setMastodonConfig(
     @Body() mastodonConfigurationDto: MastodonConfigurationDto
   ) {
-    return this.mastodonConfigurationService.setConfig(mastodonConfigurationDto);
+    return this.mastodonConfigurationService.setMastodonConfig(mastodonConfigurationDto);
   }
   @Put("updateMastodonConfig")
   updateMastodonConfig(
     @Body() mastodonConfigurationDto: MastodonConfigurationDto
   ) {
-    return this.mastodonConfigurationService.updateConfig(mastodonConfigurationDto);
+    return this.mastodonConfigurationService.updateMastodonConfig(mastodonConfigurationDto);
   }
   @Delete("deleteMastodonConfig")
   deleteMastodonConfig(
     @Body() mastodonConfigurationDto: MastodonConfigurationDto
   ) {
-    return this.mastodonConfigurationService.deleteConfig(mastodonConfigurationDto);
+    return this.mastodonConfigurationService.deleteMastodonConfig(mastodonConfigurationDto);
   }
 }
  
