@@ -8,6 +8,7 @@ import { InternalConfig } from '../config/types/internal.config.model';
 import { AdminConfig } from '../admin/types/admin.config.model';
 import { PlaneSubscription } from './types/planeSubscription.model';
 import { AdbsPlane } from '../adbs/types/adbs.plane.model';
+import { PlaneSubcriptionDto } from './types/planeSubscription.dto';
 
 @Injectable()
 export class PlaneSubscriptionService {
@@ -26,8 +27,34 @@ export class PlaneSubscriptionService {
     ){
   }
 
-  getData(): { message: string } {
-    return ({ message: 'Hello API' });
+  getPlaneSubscriptionList(planeSubscriptionRequest: PlaneSubcriptionDto){
+    return this.planeSubscription.findOne({
+        where: {
+            tenant: planeSubscriptionRequest.tenant
+        }
+    })
+  }
+
+  addPlaneSubscriptionList(planeSubscriptionRequest: PlaneSubcriptionDto) {
+    return this.planeSubscription.create({
+        ...planeSubscriptionRequest
+    });
+  }
+
+  removePlaneSubscriptionList(planeSubscriptionRequest: PlaneSubcriptionDto){
+    return this.planeSubscription.destroy({
+        where: {
+            tenant: planeSubscriptionRequest.tenant
+        }
+    })
+  }
+
+  updatePlaneSubscriptionList(planeSubscriptionRequest: PlaneSubcriptionDto) {
+    return this.planeSubscription.update(planeSubscriptionRequest, {
+        where: {
+            tenant: planeSubscriptionRequest.tenant
+        }
+    })
   }
 
   }

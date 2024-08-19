@@ -8,11 +8,29 @@ import { PlaneSubscriptionService } from './planeSubscription.service';
 export class DiscordController {
   constructor(private readonly planeSubscriptionService: PlaneSubscriptionService) {}
 
-  @Post("getData")
-  getData(
+  @Post("getPlaneSubscriptionList")
+  getPlaneSubscriptionList(
     @Body() planeSubscriptionRequest: PlaneSubcriptionDto
   ) {
-    return this.planeSubscriptionService.getData();
+    return this.planeSubscriptionService.getPlaneSubscriptionList();
+  }
+  @Post("addPlaneSubscriptionList")
+  addPlaneSubscriptionList(
+    @Body() planeSubscriptionRequest: PlaneSubcriptionDto
+  ) {
+    return this.planeSubscriptionService.addPlaneSubscriptionList();
+  }
+  @Post("removePlaneSubscriptionList")
+  removePlaneSubscriptionList(
+    @Body() planeSubscriptionRequest: PlaneSubcriptionDto
+  ) {
+    return this.planeSubscriptionService.removePlaneSubscriptionList();
+  }
+  @Post("updatePlaneSubscriptionList")
+  updatePlaneSubscriptionList(
+    @Body() planeSubscriptionRequest: PlaneSubcriptionDto
+  ) {
+    return this.planeSubscriptionService.updatePlaneSubscriptionList();
   }
 }
  
