@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { StatsService } from './stats/stats.service';
-import { StatsController } from './stats/stats.controller';
 import { HttpModule } from '@nestjs/axios';
 import { AdbsModule } from './adbs/adbs.module';
 import { DatabaseModule } from './database.module';
