@@ -11,18 +11,24 @@ import { PlaneSubscription } from './types/planeSubscription.model';
 import { InternalJobs } from '../jobs/types/jobs.model';
 import { Discord } from '../discord/message/types/discord.model';
 import { DiscordService } from '../discord/message/discord.service';
+import { DiscordConfig } from '../discord/configuration/types/discord.configuration.model';
+import { AvgService } from '../avg/avg.service';
+import { Avg } from '../avg/types/avg.model';
 
 @Module({
     imports: [
         HttpModule,
         SequelizeModule.forFeature([AdbsPlane]),
+        SequelizeModule.forFeature([Avg]),
         SequelizeModule.forFeature([InternalConfig]),
         SequelizeModule.forFeature([AdminConfig]),
         SequelizeModule.forFeature([Discord]),
         SequelizeModule.forFeature([InternalJobs]),
         SequelizeModule.forFeature([PlaneSubscription]),
+        SequelizeModule.forFeature([DiscordConfig]),
+
 
     ],
-  providers: [PlaneSubscriptionService, DiscordService, AdminConfigService, AdbsService],
+  providers: [PlaneSubscriptionService, DiscordService, AdminConfigService, AvgService, AdbsService],
 })
 export class PlaneSubscriptionModule {}

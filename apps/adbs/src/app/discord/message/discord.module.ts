@@ -8,6 +8,8 @@ import { AdminConfig } from '../../admin/types/admin.config.model';
 import { InternalConfig } from '../../config/types/internal.config.model';
 import { InternalJobs } from '../../jobs/types/jobs.model';
 import { Discord } from './types/discord.model';
+import { DiscordConfig } from '../configuration/types/discord.configuration.model';
+import { DiscordConfigurationService } from '../configuration/discord.configuration.service';
 
 
 
@@ -19,8 +21,9 @@ import { Discord } from './types/discord.model';
         SequelizeModule.forFeature([InternalConfig]),
         SequelizeModule.forFeature([Discord]),
         SequelizeModule.forFeature([InternalJobs]),
+        SequelizeModule.forFeature([DiscordConfig]),
     ],
     controllers: [DiscordController],
-    providers: [DiscordService],
+    providers: [DiscordService, DiscordConfigurationService],
 })
 export class DiscordModule {}

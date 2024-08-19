@@ -7,7 +7,7 @@ export class InternalConfig extends Model{
     @Column
     tenant: string;
     @Column 
-    communicationTypes: string[];
+    communicationTypes: string;
     @Column
     discordChannel: string;
     @Column

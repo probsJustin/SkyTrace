@@ -6,6 +6,7 @@ import { AdminConfig } from '../admin/types/admin.config.model';
 import { Avg } from './types/avg.model';
 import { AvgDto } from './types/avg.dto';
 import { AdbsPlane } from '../adbs/types/adbs.plane.model';
+import { DiscordConfig } from '../discord/configuration/types/discord.configuration.model';
 
 @Injectable()
 export class AvgService {
@@ -17,6 +18,8 @@ export class AvgService {
     private readonly adminConfig: typeof AdminConfig,
     @InjectModel(AdbsPlane)
     private readonly adbsPlane: typeof AdbsPlane,
+    @InjectModel(DiscordConfig)
+    private readonly discordConfig: typeof DiscordConfig,
     @InjectModel(Avg)
     private readonly avg: typeof Avg,
     ){
