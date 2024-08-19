@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { StatsService } from './stats.service';
 import { ApiTags } from '@nestjs/swagger';
 import { StatsDto } from './types/stats.dto';
@@ -8,11 +8,10 @@ import { StatsDto } from './types/stats.dto';
 export class StatsController {
   constructor(private readonly statsService: StatsService) {}
 
-  @Post()
-  calculateMilitary(
-    @Body() statsRequest: StatsDto
+  @Get('yearlyMilitaryProjectedData')
+  calculateProjectedMilitaryAdbsPlanes(
   ) {
-    return this.statsService.calculateMilitary();
+    return this.statsService.calculateProjectedMilitaryAdbsPlanes();
   }
 
   @Post('calcPlane')

@@ -8,6 +8,7 @@ import { InternalJobs } from './types/jobs.model';
 import { Op } from 'sequelize';
 import { DiscordConfig } from '../discord/configuration/types/discord.configuration.model';
 import { DiscordService } from '../discord/message/discord.service';
+import { StatsService } from '../stats/stats.service';
 
 @Injectable()
 export class AdbsJobsService {
@@ -15,6 +16,7 @@ export class AdbsJobsService {
     constructor(
         private discordService: DiscordService,
         private adbsService: AdbsService,
+        private statsService: StatsService,
         @InjectModel(AdbsPlane)
         private readonly planeModel: typeof AdbsPlane,
         @InjectModel(InternalJobs)
@@ -70,6 +72,8 @@ export class AdbsJobsService {
             jobNumber: getJobNumber,
           }
         })
+        const projectedMilitaryPlanesDbSize = this.statsService.calculateProjectedMilitaryAdbsPlanes();
+        await this.discordService.sendAdminMessage({tenant: "admin", discordChannel: "Justins Code Support", discordServer: "", discordMessage: `[${new Date()}]:[${getJobNumber}] Estimated Projection for Last Day [365]: ${projectedMilitaryPlanesDbSize.length}`});
       }catch(err){
         console.log(`JSON: ${JSON.stringify(err)}`);
       }
