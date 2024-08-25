@@ -11,7 +11,7 @@ import { AdbsPlane } from './adbs/types/adbs.plane.model';
       imports: [ConfigModule], // Import the ConfigModule to use ConfigService
       useFactory: async (configService: ConfigService) => ({
         dialect: 'mysql',
-        host: "localhost",
+        host: "192.168.0.20",
         port: 3306,
         username: "root",
         password: "test",

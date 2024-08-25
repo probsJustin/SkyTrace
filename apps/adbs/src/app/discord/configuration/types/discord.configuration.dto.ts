@@ -21,4 +21,9 @@ export class DiscordConfigurationDto {
         example: "Something that doesnt matter...."
     })
     discordMessage: string;
+
+    @ApiProperty({
+        example: "Something that doesnt matter...."
+    })
+    discordWebhook: string;
 }
