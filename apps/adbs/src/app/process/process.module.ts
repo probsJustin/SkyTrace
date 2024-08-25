@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { HttpModule } from '@nestjs/axios';
-import { AdbsPlane } from './types/process.model';
 import { InternalConfig } from '../config/types/internal.config.model';
 import { AdminConfig } from '../admin/types/admin.config.model';
 import { InternalJobs } from '../jobs/types/jobs.model';
@@ -12,6 +11,7 @@ import { ProcessController } from './process.controller';
 import { ProcessService } from './process.service';
 import { AvgService } from '../avg/avg.service';
 import { Avg } from '../avg/types/avg.model';
+import { AdbsPlane } from '../adbs/types/adbs.plane.model';
 
 @Module({
     imports: [

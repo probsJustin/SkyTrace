@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { AdbsPlane } from './types/process.model';
 import { InjectModel } from '@nestjs/sequelize';
 import { InternalConfig } from '../config/types/internal.config.model';
 import { AdminConfig } from '../admin/types/admin.config.model';
 import { DiscordService } from '../discord/message/discord.service';
 import { AvgService } from '../avg/avg.service';
 import { ProcessDto } from './types/process.dto';
+import { AdbsPlane } from '../adbs/types/adbs.plane.model';
 
 @Injectable()
 export class ProcessService {

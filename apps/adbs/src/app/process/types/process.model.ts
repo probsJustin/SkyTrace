@@ -2,7 +2,7 @@ import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, Unique, Defa
 import { v4 as uuidv4 } from 'uuid';
     
 @Table
-export class AdbsPlane extends Model{
+export class AdbsPlaneProcess extends Model{
     
     @Column
     type: string;
