@@ -72,7 +72,7 @@ export class AdbsJobsService {
             jobNumber: getJobNumber,
           }
         })
-        const projectedMilitaryPlanesDbSize = this.statsService.calculateProjectedMilitaryAdbsPlanes();
+        const projectedMilitaryPlanesDbSize = await this.statsService.calculateProjectedMilitaryAdbsPlanes();
         await this.discordService.sendAdminMessage({tenant: "admin", discordChannel: "Justins Code Support", discordServer: "", discordMessage: `[${new Date()}]:[${getJobNumber}] Estimated Projection for Last Day [365]: ${projectedMilitaryPlanesDbSize}`});
       }catch(err){
         console.log(`JSON: ${JSON.stringify(err)}`);
